@@ -9,7 +9,7 @@ def index():
     return jsonify({"Hello Word": "Welcome to Pipo Flask app"})
 
 @app.route('/api')
-def index():
+def index_api():
     return jsonify({
    "autor":"Pipo Del Giudice",
    "edad":26,
