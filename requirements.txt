@@ -11,3 +11,4 @@ requests==2.25.1
 marshmallow==2.15.0
 marshmallow-enum==1.4.1
 PyMySQL==1.0.2
+mysqlclient
