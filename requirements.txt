@@ -13,3 +13,4 @@ marshmallow-enum==1.4.1
 PyMySQL==1.0.2
 mysqlclient
 Flask-MySQL==1.4.0
+Flask-APScheduler

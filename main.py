@@ -4,7 +4,46 @@ from flask import Flask, jsonify
 import db
 from models import Partidos, Test
 
+from flask_apscheduler import APScheduler
+import multiprocessing
+import random
+
 app = Flask(__name__)
+
+scheduler = APScheduler()
+scheduler.init_app(app)
+scheduler.start()
+
+INTERVAL_TASK_ID = 'interval-task-id'
+
+def interval_task():
+    input_test = Test(random.uniform(19, 31), 'Task-24-Day')
+    db.session.add(input_test)
+    db.session.commit()
+
+scheduler.add_job(id=INTERVAL_TASK_ID, func=interval_task, trigger='interval', seconds=60*60)
+
+
+@app.route('/')
+def welcome():
+    return 'Welcome to Flask_APscheduler interval task demo', 200
+
+
+@app.route('/current-temperature')
+def current_temperature():
+    return 'Current temperature is ' + str(simulated_room_temperature.value), 200
+
+
+@app.route('/pause-interval-task')
+def pause_interval_task():
+    scheduler.pause_job(id=INTERVAL_TASK_ID)
+    return 'Interval task paused', 200
+
+
+@app.route('/resume-interval-task')
+def resume_interval_task():
+    scheduler.resume_job(id=INTERVAL_TASK_ID)
+    return 'Interval task resumed', 200
 
 
 @app.route('/')
