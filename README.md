@@ -21,3 +21,11 @@ This is a [Flask](https://flask.palletsprojects.com/en/1.1.x/) app that serves a
 
 - Install Python requirements `pip install -r requirements.txt`
 - Start the server for development `python3 main.py`
+
+
+Feature:
+
+- Periodic task (Testing save random data in DB)
+- Input data in DB
+- Get Data en DB
+- Class of Matches
