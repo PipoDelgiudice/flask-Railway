@@ -24,23 +24,13 @@ def interval_task():
 scheduler.add_job(id=INTERVAL_TASK_ID, func=interval_task, trigger='interval', seconds=60*60)
 
 
-@app.route('/')
-def welcome():
-    return 'Welcome to Flask_APscheduler interval task demo', 200
-
-
-@app.route('/current-temperature')
-def current_temperature():
-    return 'Current temperature is ' + str(simulated_room_temperature.value), 200
-
-
-@app.route('/pause-interval-task')
+@app.route('/pause-task')
 def pause_interval_task():
     scheduler.pause_job(id=INTERVAL_TASK_ID)
     return 'Interval task paused', 200
 
 
-@app.route('/resume-interval-task')
+@app.route('/resume-task')
 def resume_interval_task():
     scheduler.resume_job(id=INTERVAL_TASK_ID)
     return 'Interval task resumed', 200
