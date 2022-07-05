@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, jsonify
-from db import db
+import db
 from models import Partidos, Test
 
 app = Flask(__name__)
