@@ -11,6 +11,7 @@ app = Flask(__name__)
 def index():
     return jsonify({"Hello Word": "Welcome to Pipo Flask app"})
 
+
 @app.route('/api')
 def index_api():
     return jsonify({
@@ -19,15 +20,28 @@ def index_api():
        "profesión":"Desarrollador Back-End"
     })
 
-@app.route('/api/<int:value>')
-def test_db(value):
 
-    input_test = Test(value,'test')
+@app.route('/test/<int:value>')
+def test_db(value):
+    input_test = Test(value, 'test')
     db.session.add(input_test)
     db.session.commit()
     return jsonify({
        "valor": value
     })
+
+@app.route('/test')
+def test_get_db():
+    json = {}
+    data = db.session.query(Test).all()
+    for info in data:
+        aux = {info.id: {
+               'test': info.test,
+               'valor': info.value}
+              }
+        json.update(aux)
+
+    return jsonify(json)
 
 if __name__ == '__main__':
     db.Base.metadata.create_all(db.engine)
