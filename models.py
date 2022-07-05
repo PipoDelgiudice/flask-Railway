@@ -24,6 +24,6 @@ class Test(db.Base):
     test = Column(String)
     value = Column(Integer)
 
-    def __init__(self, test='prueba',value):
+    def __init__(self, value, test='prueba'):
         self.test = test
         self.value = value

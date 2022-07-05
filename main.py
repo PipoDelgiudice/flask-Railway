@@ -22,7 +22,7 @@ def index_api():
 @app.route('/api/<int:value>')
 def test_db(value):
 
-    input_test = Test('test', value)
+    input_test = Test(value,'test')
     db.session.add(input_test)
     db.session.commit()
     return jsonify({
