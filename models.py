@@ -1,7 +1,7 @@
 import db
 
 from sqlalchemy import Column, Integer, String, Float, DateTime
-
+import datetime
 
 class Partidos(db.Base):
     __tablename__ = 'matches'
@@ -9,8 +9,8 @@ class Partidos(db.Base):
     id = Column(Integer, primary_key=True)
     local = Column(String)
     visitante = Column(String)
-    fecha = Column(DateTime, default=datetime.utcnow())
-    last_update = Column(DateTime, default=datetime.utcnow())
+    fecha = Column(DateTime, default=datetime.datetime.utcnow())
+    last_update = Column(DateTime, default=datetime.datetime.utcnow())
     score = Column(String, default='0-0')
     Status = Column(String)
 
