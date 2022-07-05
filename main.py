@@ -21,7 +21,8 @@ def interval_task():
     db.session.add(input_test)
     db.session.commit()
 
-scheduler.add_job(id=INTERVAL_TASK_ID, func=interval_task, trigger='interval', seconds=os.getenv("INTERVAL_TASK", default=60*60))
+scheduler.add_job(id=INTERVAL_TASK_ID, func=interval_task, trigger='interval',
+                  seconds=int(os.getenv("INTERVAL_TASK", default=3600)))
 
 
 @app.route('/pause-task')
