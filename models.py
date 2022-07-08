@@ -17,8 +17,24 @@ class Partidos(db.Base):
     score = Column(String(40), default='0-0')
     Status = Column(String(40))
 
-    def __init__(self):
-        pass
+    def __init__(self, id, local=None, visitante=None, fecha=None, score=None, Status=None):
+        self.id = id
+        self.local = local
+        self.visitante = visitante
+        self.fecha = fecha
+        self.score = score
+        self.Status = Status
+        self.last_update = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+
+@dataclass
+class Match:
+    id = None
+    local = None
+    visitante = None
+    fecha = None
+    last_update = None
+    score = None
+    Status = None
 
 
 @dataclass

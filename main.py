@@ -7,6 +7,7 @@ from models import Partidos, Test
 from flask_apscheduler import APScheduler
 import multiprocessing
 import random
+from matches import Matches
 
 app = Flask(__name__)
 
@@ -15,6 +16,9 @@ scheduler.init_app(app)
 scheduler.start()
 
 INTERVAL_TASK_ID = 'interval-task-id'
+
+api_futbol = Matches()
+
 
 def interval_task():
     input_test = Test(random.uniform(19, 31), 'Task-24-Day')
@@ -72,6 +76,18 @@ def test_get_db():
         json.update(aux)
 
     return jsonify(json)
+
+
+@app.route('/futbol')
+def test_get_api_matches():
+    return api_futbol.get_api_matches()
+
+
+@app.route('/getfutbol')
+def test_get_matches():
+    return api_futbol.get_all_matches()
+
+
 
 if __name__ == '__main__':
     db.Base.metadata.create_all(db.engine)
