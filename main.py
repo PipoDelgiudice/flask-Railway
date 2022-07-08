@@ -25,9 +25,6 @@ def interval_task():
     db.session.add(input_test)
     db.session.commit()
 
-scheduler.add_job(id=INTERVAL_TASK_ID, func=interval_task, trigger='interval',
-                  seconds=int(os.getenv("INTERVAL_TASK", default=3600)))
-
 
 @app.route('/pause-task')
 def pause_interval_task():
@@ -87,6 +84,8 @@ def test_get_api_matches():
 def test_get_matches():
     return api_futbol.get_all_matches()
 
+scheduler.add_job(id=INTERVAL_TASK_ID, func=test_get_api_matches, trigger='interval',
+                  seconds=int(os.getenv("INTERVAL_TASK", default=3600)))
 
 
 if __name__ == '__main__':

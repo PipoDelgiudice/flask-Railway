@@ -2,7 +2,7 @@ import requests
 import json
 import db
 import os
-from models import Partidos, Test, Match
+from models import Partidos, Test, Match, MatchesResponse
 import datetime
 from flask import jsonify
 from collections import defaultdict
@@ -61,8 +61,9 @@ class Matches:
         return db.session.query(Partidos).filter_by(id=id_input).first()
 
     def get_all_matches(self):
-        matches = db.session.query(Partidos).all()
-        for each in matches:
+        matches_db = db.session.query(Partidos).all()
+        matches = []
+        for each in matches_db:
             m = Match()
             m.id = each.id
             m.local = each.local
@@ -72,7 +73,10 @@ class Matches:
             m.score = each.score
             m.Status = each.Status
             matches.append(m)
-        return [asdict(m) for m in matches]
+        lista = [asdict(m) for m in matches]
+        matches_resp = MatchesResponse()
+        matches_resp.matches = lista
+        return asdict(matches_resp)
 
     def get_store(self, score):
         if score["fullTime"]["home"] is None and score["fullTime"]["away"] is None:

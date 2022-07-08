@@ -3,6 +3,7 @@ import db
 from sqlalchemy import Column, Integer, String, Float, DateTime
 import datetime
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -26,15 +27,20 @@ class Partidos(db.Base):
         self.Status = Status
         self.last_update = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 
+
 @dataclass
 class Match:
-    id = None
-    local = None
-    visitante = None
-    fecha = None
-    last_update = None
-    score = None
-    Status = None
+    id: Optional[str] = None
+    local: Optional[str] = None
+    visitante: Optional[str] = None
+    fecha: Optional[str] = None
+    last_update: Optional[str] = None
+    score: Optional[str] = None
+    Status: Optional[str] = None
+
+@dataclass
+class MatchesResponse:
+    matches: Optional[list] = None
 
 
 @dataclass
